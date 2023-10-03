@@ -4,7 +4,7 @@ import TaskCard from '../components/tasks/TaskCard';
 import AddTaskModal from '../components/tasks/AddTaskModal';
 import { useState } from 'react';
 import MenuDropdown from '../components/ui/MenuDropdown';
-import { useGetTaskQuery } from '../redux/features/api/baseApi';
+import { useGetTaskQuery } from '../redux/features/tasks/taskApi';
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +49,7 @@ const Tasks = () => {
               </MenuDropdown>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-5 mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
             <div className="relative h-[800px] overflow-auto">
               <div className="flex sticky top-0  justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
                 <h1>Up Next</h1>
