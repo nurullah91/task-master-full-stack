@@ -20,11 +20,14 @@ export const createUser = createAsyncThunk(
     })
     console.log(data);
     return {
-      email: data.email,
-      name: data.displayName
+      email: data.user.email,
+      name: data.user.displayName
     };
   }
 )
+
+// Login user
+
 
 
 const userSlice = createSlice({
@@ -53,6 +56,7 @@ const userSlice = createSlice({
       state.error = "";
     })
       .addCase(createUser.fulfilled, (state, { payload }) => {
+        console.log(payload);
         state.name = payload.name;
         state.email = payload.email;
         state.isLoading = false;
