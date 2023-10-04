@@ -4,10 +4,12 @@ import { useAddTaskMutation } from '../../redux/features/tasks/taskApi';
 
 const AddTaskModal = ({ isOpen, setIsOpen }) => {
   const { register, handleSubmit, reset } = useForm();
- const [addTask, {data, error}] = useAddTaskMutation()
+  
+//  const [addTask, {data, error}] = useAddTaskMutation()
+ const [addTask] = useAddTaskMutation()
 
- console.log(data);
- console.log(error);
+
+ 
   const onCancel = () => {
     reset();
     setIsOpen(false);
@@ -19,7 +21,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="Programming Hero">
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} title="Add a new task">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col mb-5">
           <label htmlFor="title" className="mb-2">

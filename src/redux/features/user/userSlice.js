@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import auth from '../../../utils/firebase.config';
 
 const initialState = {
@@ -27,7 +27,17 @@ export const createUser = createAsyncThunk(
 )
 
 // Login user
-
+export const loginUser = createAsyncThunk(
+  'userSlice/loginUser',
+  async ({ email, password }) => {
+    const data = await signInWithEmailAndPassword(auth, email, password)
+    
+    return {
+      email: data.user.email,
+      name: data.user.displayName,
+    }
+  }
+)
 
 
 const userSlice = createSlice({
@@ -39,7 +49,7 @@ const userSlice = createSlice({
       state.email = payload.email;
 
     },
-    toggleLoading: (state, {payload}) => {
+    toggleLoading: (state, { payload }) => {
       state.isLoading = payload
     },
     logout: (state) => {
@@ -56,7 +66,7 @@ const userSlice = createSlice({
       state.error = "";
     })
       .addCase(createUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
+
         state.name = payload.name;
         state.email = payload.email;
         state.isLoading = false;
@@ -71,10 +81,31 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
 
-
+    builder.addCase(loginUser.pending, (state) => {
+      state.name = '';
+      state.email = '';
+      state.isLoading = true;
+      state.isError = false;
+      state.error = '';
+    })
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.name = payload.name;
+        state.email = payload.email;
+        state.isLoading = false;
+        state.isError = false;
+        state.error = "";
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.name = '';
+        state.email = '';
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error.message;
+      })
   }
+
 });
 
-export const {setUser, toggleLoading, logout} = userSlice.actions
+export const { setUser, toggleLoading, logout } = userSlice.actions
 
 export default userSlice.reducer;

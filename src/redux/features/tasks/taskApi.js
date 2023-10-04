@@ -23,8 +23,15 @@ const taskApi = baseApi.injectEndpoints({
                 body: task,
             }),
             invalidatesTags: ['Tasks']
+        }),
+        deleteTask: builder.mutation({
+            query:(id) => ({
+                url: `/tasks/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ['Tasks']
         })
     })
 })
 
-export const {useAddTaskMutation, useGetTaskQuery, useUpdateTaskMutation} = taskApi;
+export const {useAddTaskMutation, useGetTaskQuery, useUpdateTaskMutation, useDeleteTaskMutation} = taskApi;
