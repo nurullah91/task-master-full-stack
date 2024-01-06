@@ -1,11 +1,20 @@
 # Task Master
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### This project is Created for managing tasks with Redux
 
-Currently, two official plugins are available:
+## Installation
+```
+yarn
+```
+```
+yarn dev
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Front-end Live link
+#### https://task-master-32a75.web.app
 
 
-### To run this project locally please command this "yarn" and then "yarn dev"
+## Server Links
+#### Server Live: https://taskmaster-server-ebon.vercel.app/tasks
+#### Server Code: https://github.com/nurullah91/task-master-server
